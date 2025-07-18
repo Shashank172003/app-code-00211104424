@@ -30,9 +30,7 @@ jobs:
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build Docker image
-        # Ensure the '.' is correctly passed as the build context.
-        # The error "requires 1 argument" means the context was missing.
-        run: docker buildx build --platform linux/amd64 -t ${{ secrets.DOCKER_USERNAME }}/node-app:${{ secrets.ROLL_NO }} --load .
+        run: docker buildx build --platform linux/amd64 --load -t ${{ secrets.DOCKER_USERNAME }}/node-app:${{ secrets.ROLL_NO }} .
 
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/node-app:${{ secrets.ROLL_NO }}
@@ -45,9 +43,7 @@ jobs:
       - name: Deploy to EC2
         run: |
           ssh -o StrictHostKeyChecking=no -i ec2-key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-            # Use single quotes around EOF to prevent shell variable expansion on the GitHub Actions runner side
-            # This ensures the commands within EOF are interpreted on the EC2 instance.
-            docker ps -a | grep app && docker rm -f app || true
+            docker rm -f app || true
             docker pull ${{ secrets.DOCKER_USERNAME }}/node-app:${{ secrets.ROLL_NO }}
             docker run -d -p 5000:5000 --name app ${{ secrets.DOCKER_USERNAME }}/node-app:${{ secrets.ROLL_NO }}
           EOF
