@@ -26,6 +26,11 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Debug image tag
+        run: |
+          echo "DOCKER_USERNAME: '${{ secrets.DOCKER_USERNAME }}'"
+          echo "ROLL_NO: '${{ secrets.ROLL_NO }}'"
+
       - name: Log in to DockerHub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
