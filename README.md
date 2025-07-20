@@ -28,9 +28,11 @@ This repository contains a simple **Node.js Express** application, fully Dockeri
 
 app-code-00211104424/
 ├── app/
-│ └── index.js # Main Express app
-├── Dockerfile # Docker image definition
+│   └── index.js            # Main Express app
+├── Dockerfile              # Docker image definition
 ├── .github/
-│ └── workflows/
-│ └── ci-cd.yml # CI/CD GitHub Actions workflow
+│   └── workflows/
+│       └── ci-cd.yml       # CI/CD GitHub Actions workflow
 └── README.md
+
+
