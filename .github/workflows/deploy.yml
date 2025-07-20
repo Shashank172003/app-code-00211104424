@@ -48,7 +48,11 @@ jobs:
            docker buildx build --platform linux/amd64 --load -t "$IMAGE_TAG" .
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/node-app:${{ secrets.ROLL_NO }}
+        run: |
+         IMAGE_TAG="shashanknagvanshi/node-app:${{ secrets.ROLL_NO }}"
+         echo "Pushing image: $IMAGE_TAG"
+         docker push "$IMAGE_TAG"
+
 
       - name: Setup SSH key
         run: |
