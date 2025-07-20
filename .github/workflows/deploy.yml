@@ -28,8 +28,7 @@ jobs:
 
       - name: Debug image tag
         run: |
-          echo "DOCKER_USERNAME: '${{ secrets.DOCKER_USERNAME }}'"
-          echo "ROLL_NO: '${{ secrets.ROLL_NO }}'"
+          echo "Tag will be: shashanknagvanshi/node-app:${{ secrets.ROLL_NO }}"
 
       - name: Log in to DockerHub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
@@ -44,9 +43,9 @@ jobs:
 
       - name: Build Docker image
         run: |
-          IMAGE_TAG="${{ secrets.DOCKER_USERNAME }}/node-app:${{ secrets.ROLL_NO }}"
-          echo "Building Docker image: $IMAGE_TAG"
-          docker buildx build --platform linux/amd64 --load -t "$IMAGE_TAG" .
+           IMAGE_TAG="shashanknagvanshi/node-app:${{ secrets.ROLL_NO }}"
+           echo "Building Docker image: $IMAGE_TAG"
+           docker buildx build --platform linux/amd64 --load -t "$IMAGE_TAG" .
 
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/node-app:${{ secrets.ROLL_NO }}
