@@ -22,17 +22,4 @@ This repository contains a simple **Node.js Express** application, fully Dockeri
 - AWS EC2 (via SSH)
 - DockerHub
 
----
-
-## 📁 Project Structure
-
-app-code-00211104424/
-├── app/
-│   └── index.js            # Main Express app
-├── Dockerfile              # Docker image definition
-├── .github/
-│   └── workflows/
-│       └── ci-cd.yml       # CI/CD GitHub Actions workflow
-└── README.md
-
 
