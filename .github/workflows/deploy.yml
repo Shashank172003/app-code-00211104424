@@ -64,6 +64,6 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i ec2-key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             docker rm -f buddy || true
             docker pull shashanknagvanshi/node-app:${{ secrets.ROLL_NO }}
-            docker run -d -p 2003:5000 --name buddy shashanknagvanshi/node-app:${{ secrets.ROLL_NO }}
+            docker run -d -p 1840:5000 --name buddy shashanknagvanshi/node-app:${{ secrets.ROLL_NO }}
           EOF
 
